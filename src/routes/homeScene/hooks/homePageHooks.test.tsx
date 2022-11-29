@@ -1,9 +1,16 @@
-import useHomePageHooks from '../hooks/homePageHooks'
 import { renderHook, act } from '@testing-library/react-hooks'
+import { renderWrapper } from 'utils/providerWrapper'
+import { store } from 'store/store'
+
+import useHomePageHooks from '../hooks/homePageHooks'
 
 describe('sum', () => {
   test('useHomePageHooks', () => {
-    const { result } = renderHook(() => useHomePageHooks())
+    const { result } = renderHook(() => useHomePageHooks(), {
+      wrapper: renderWrapper(store)
+    })
+    expect(result.current.sum).toBe(0)
+
     const { onChangeInput1, onChangeInput2 } = result.current
 
     act(() => {
