@@ -1,21 +1,14 @@
 import { useEffect, useState } from 'react'
+import { selectSum } from '../../../store/reducer/home/homeSelector'
+import { setFirstInput, setSecondInput } from '../../../store/reducer/home/homeSlice'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
 
 export default () => {
-  const [input1, setInput1] = useState<number>(0)
-  const [input2, setInput2] = useState<number>(0)
-  const [sum, setSum] = useState<number>(0)
+  const sum: number = useAppSelector(selectSum)
+  const dispatch = useAppDispatch()
 
-  const onChangeInput1 = (text: string) => {
-    setInput1(parseInt(text) || 0)
-  }
-
-  const onChangeInput2 = (text: string) => {
-    setInput2(parseInt(text) || 0)
-  }
-
-  useEffect(() => {
-    setSum(input1 + input2)
-  }, [input1, input2])
+  const onChangeInput1 = (text: string) => dispatch(setFirstInput(parseInt(text) || 0))
+  const onChangeInput2 = (text: string) => dispatch(setSecondInput(parseInt(text) || 0))
 
   return {
     sum,
