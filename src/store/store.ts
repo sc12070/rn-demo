@@ -4,7 +4,8 @@ import homeReducer from './reducer/home/homeSlice'
 export const store = configureStore({
   reducer: {
     home: homeReducer
-  }
+  },
+  devTools: true
 })
 
 export type AppDispatch = typeof store.dispatch
