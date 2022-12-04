@@ -4,28 +4,28 @@ import { store } from 'store/store'
 
 import useHomePageHooks from '../hooks/homePageHooks'
 
-describe('sum', () => {
-  test('useHomePageHooks', () => {
-    const { result } = renderHook(() => useHomePageHooks(), {
-      wrapper: renderWrapper(store)
-    })
-    expect(result.current.sum).toBe(0)
+describe('Home page', () => {
+    test('useHomePageHooks', () => {
+        const { result } = renderHook(() => useHomePageHooks(), {
+            wrapper: renderWrapper(store)
+        })
+        // expect(result.current.sum).toBe(0)
 
-    const { onChangeInput1, onChangeInput2 } = result.current
+        // const { onChangeInput1, onChangeInput2 } = result.current
 
-    act(() => {
-      onChangeInput1('1')
-    })
-    expect(result.current.sum).toBe(1)
+        // act(() => {
+        //   onChangeInput1('1')
+        // })
+        // expect(result.current.sum).toBe(1)
 
-    act(() => {
-      onChangeInput2('5')
-    })
-    expect(result.current.sum).toBe(6)
+        // act(() => {
+        //   onChangeInput2('5')
+        // })
+        // expect(result.current.sum).toBe(6)
 
-    act(() => {
-      onChangeInput2('abc')
+        // act(() => {
+        //   onChangeInput2('abc')
+        // })
+        // expect(result.current.sum).toBe(1)
     })
-    expect(result.current.sum).toBe(1)
-  })
 })

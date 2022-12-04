@@ -1,18 +1,48 @@
 import { useEffect, useState } from 'react'
-import { selectSum } from 'store/reducer/home/homeSelector'
-import { setFirstInput, setSecondInput } from 'store/reducer/home/homeSlice'
+import { selectStockSymbolList, selectStockList } from 'store/reducer/home/homeSelector'
 import { useAppSelector, useAppDispatch } from 'store/hooks'
+import {
+    appendStockSymbolList,
+    fetchStockList,
+    getStoredStockSymbolList
+} from 'store/reducer/home/homeActions'
 
 export default () => {
-  const sum = useAppSelector(selectSum)
-  const dispatch = useAppDispatch()
+    const [symbolInput, setSymbolInput] = useState('')
+    const stockSymbolList = useAppSelector(selectStockSymbolList)
+    const stockList = useAppSelector(selectStockList)
+    const dispatch = useAppDispatch()
+    let timerId: number
 
-  const onChangeInput1 = (text: string) => dispatch(setFirstInput(parseInt(text) || 0))
-  const onChangeInput2 = (text: string) => dispatch(setSecondInput(parseInt(text) || 0))
+    useEffect(() => {
+        dispatch(getStoredStockSymbolList())
+    }, [])
 
-  return {
-    sum,
-    onChangeInput1,
-    onChangeInput2
-  }
+    useEffect(() => {
+        dispatch(fetchStockList(stockSymbolList))
+        timerId = setInterval(() => {
+            dispatch(fetchStockList(stockSymbolList))
+        }, 10000)
+
+        return () => {
+            clearInterval(timerId)
+        }
+    }, [stockSymbolList])
+
+    const addStockSymbol = () => {
+        if (symbolInput === '') {
+            return
+        }
+        dispatch(appendStockSymbolList(symbolInput.toUpperCase()))
+        setSymbolInput('')
+    }
+
+    return {
+        symbolInput,
+        stockList,
+        setSymbolInput,
+        addStockSymbol
+    }
 }
+
+//https://query1.finance.yahoo.com/v11/finance/quoteSummary/aapl?modules=financialData
