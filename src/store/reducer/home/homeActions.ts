@@ -8,7 +8,7 @@ import { selectStockSymbolList } from './homeSelector'
 
 export const getStoredStockSymbolList = createAsyncThunk('getStoredStockSymbolList', async () => {
     try {
-        const session = await SecureStoreHelper.get('stockSymbolList')
+        const session = await SecureStoreHelper.getWithAuth('stockSymbolList')
         if (typeof session == 'string') {
             return JSON.parse(session)
         } else {
