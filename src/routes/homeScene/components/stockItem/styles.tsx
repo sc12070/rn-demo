@@ -16,19 +16,11 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-        color: 'black'
+        color: 'black',
+        opacity: 0.7
     },
     textInfo: {
         textAlign: 'right'
-    },
-    priceChange: {
-        color: 'black'
-    },
-    priceChangeMinus: {
-        color: 'red'
-    },
-    priceChangePlus: {
-        color: 'green'
     },
     deleteBtn: {
         flex: 1,

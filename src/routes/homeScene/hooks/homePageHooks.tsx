@@ -25,7 +25,7 @@ export default () => {
         dispatch(fetchStockList(stockSymbolList))
         timerId = setInterval(() => {
             dispatch(fetchStockList(stockSymbolList))
-        }, 10000)
+        }, 6000)
 
         return () => {
             clearInterval(timerId)
