@@ -6,10 +6,13 @@ const styles = StyleSheet.create({
     },
     stockItemWrapper: {
         height: 30,
+        justifyContent: 'center',
+        flex: 10
+    },
+    stockItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        flex: 10
+        justifyContent: 'space-between'
     },
     oddWrapper: {
         backgroundColor: '#EEE'

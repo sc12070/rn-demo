@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
 
-import useHomePageHooks from '../hooks/homePageHooks'
+import useHomePageHooks from './homePageHooks'
 
 describe('Home page', () => {
     test('useHomePageHooks', () => {

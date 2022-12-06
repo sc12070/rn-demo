@@ -5,10 +5,10 @@ import styles from './styles'
 import useHomePageHooks from '../hooks/homePageHooks'
 import { StockInfo } from 'store/reducer/home/homeSlice'
 import StockItem from './stockItem/stockItem'
+import SymbolInput from './symbolInput/symbolInput'
 
 const HomePage = () => {
-    const { symbolInput, refreshing, stockList, setSymbolInput, addStockSymbol, refreshHandler } =
-        useHomePageHooks()
+    const { refreshing, stockList, refreshHandler } = useHomePageHooks()
 
     const renderItem = ({ item, index }: { item: StockInfo; index: number }) => (
         <StockItem item={item} index={index} />
@@ -18,17 +18,7 @@ const HomePage = () => {
 
     return (
         <View style={styles.bg}>
-            <View style={styles.rowWrapper}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Symbol"
-                    value={symbolInput}
-                    onChangeText={setSymbolInput}
-                />
-                <TouchableOpacity style={styles.searchBtn} onPress={() => addStockSymbol()}>
-                    <Icon name="search" size={30} color="#BBB" />
-                </TouchableOpacity>
-            </View>
+            <SymbolInput />
             <View style={[styles.rowWrapper, styles.stockListWrapper]}>
                 <Text style={styles.text}>Symbol</Text>
                 <Text style={[styles.text, styles.textInfo]}>Last</Text>

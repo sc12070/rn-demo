@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native'
 import { CHANGE } from 'constants'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from 'store/hooks'
 import { removeStockSymbolList } from 'store/reducer/home/homeActions'
 import { StockInfo } from 'store/reducer/home/homeSlice'
@@ -28,6 +29,7 @@ export default (item: StockInfo) => {
     const [volume, setVolume] = useState<string>(shortenNumber(regularMarketVolume || 0))
 
     const dispatch = useAppDispatch()
+    const navigation = useNavigation()
 
     useEffect(() => {
         switch (marketState) {
@@ -53,9 +55,14 @@ export default (item: StockInfo) => {
         setVolume(shortenNumber(regularMarketVolume || 0))
     }, [item])
 
-    const removeStockSymbol = () => {
+    const removeStockSymbol = useCallback(() => {
         dispatch(removeStockSymbolList(symbol))
-    }
+    }, [])
+
+    const toDetailPage = useCallback(
+        () => navigation.navigate('StockDetail' as never, { symbol } as never),
+        []
+    )
 
     return {
         symbol,
@@ -64,6 +71,7 @@ export default (item: StockInfo) => {
         priceChangePercent,
         change,
         volume,
-        removeStockSymbol
+        removeStockSymbol,
+        toDetailPage
     }
 }

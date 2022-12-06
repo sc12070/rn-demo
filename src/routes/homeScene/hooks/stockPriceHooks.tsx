@@ -1,5 +1,5 @@
 import { CHANGE } from 'constants'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { Animated } from 'react-native'
 import { determindChange } from 'utils/numberHelper'
 
@@ -22,7 +22,7 @@ export default (info: StockPriceInfo) => {
     const prevPriceRef = useRef<number>(price)
     const fadeAnim = useRef(new Animated.Value(valuesOpacity)).current
 
-    const fadeOut = () => {
+    const fadeOut = useCallback(() => {
         fadeAnim.setValue(1.0)
         setIsShowPriceUpdateStyle(true)
         Animated.timing(fadeAnim, {
@@ -33,7 +33,7 @@ export default (info: StockPriceInfo) => {
             setIsShowPriceUpdateStyle(false)
             fadeAnim.setValue(valuesOpacity)
         })
-    }
+    }, [])
 
     useEffect(() => {
         if (!shouldAnimated) {

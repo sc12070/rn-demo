@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { selectStockSymbolList, selectStockList } from 'store/reducer/home/homeSelector'
 import { useAppSelector, useAppDispatch } from 'store/hooks'
-import {
-    appendStockSymbolList,
-    fetchStockList,
-    getStoredStockSymbolList
-} from 'store/reducer/home/homeActions'
+import { fetchStockList, getStoredStockSymbolList } from 'store/reducer/home/homeActions'
 
 export default () => {
-    const [symbolInput, setSymbolInput] = useState('')
     const [refreshing, setRefreshing] = useState(false)
 
     const stockSymbolList = useAppSelector(selectStockSymbolList)
     const stockList = useAppSelector(selectStockList)
 
     const dispatch = useAppDispatch()
+
     let timerId: number
 
     useEffect(() => {
@@ -32,26 +29,15 @@ export default () => {
         }
     }, [stockSymbolList])
 
-    const refreshHandler = async () => {
+    const refreshHandler = useCallback(async () => {
         setRefreshing(true)
         await dispatch(getStoredStockSymbolList())
         setRefreshing(false)
-    }
-
-    const addStockSymbol = () => {
-        if (symbolInput === '') {
-            return
-        }
-        dispatch(appendStockSymbolList(symbolInput.toUpperCase()))
-        setSymbolInput('')
-    }
+    }, [])
 
     return {
-        symbolInput,
         refreshing,
         stockList,
-        setSymbolInput,
-        addStockSymbol,
         refreshHandler
     }
 }
