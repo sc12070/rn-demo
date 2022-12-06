@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import EncryptedStorage from 'react-native-encrypted-storage'
 
+import SecureStoreHelper from 'utils/secureStoreHelper'
 import { fetchRequest } from 'utils/fetchHelper'
 import { AppThunk } from 'store/store'
 import { HomeState, setStockSymbolList } from './homeSlice'
@@ -8,7 +8,7 @@ import { selectStockSymbolList } from './homeSelector'
 
 export const getStoredStockSymbolList = createAsyncThunk('getStoredStockSymbolList', async () => {
     try {
-        const session = await EncryptedStorage.getItem('stockSymbolList')
+        const session = await SecureStoreHelper.get('stockSymbolList')
         if (typeof session == 'string') {
             return JSON.parse(session)
         } else {
@@ -39,7 +39,7 @@ export const appendStockSymbolList =
     (symbol: string): AppThunk =>
     (dispatch, getState) => {
         if (symbol === 'DELETE_ALL') {
-            EncryptedStorage.removeItem('stockSymbolList')
+            SecureStoreHelper.remove('stockSymbolList')
             dispatch(setStockSymbolList([]))
             return
         }
@@ -48,7 +48,7 @@ export const appendStockSymbolList =
             return
         }
         const newStockSymbolList = [...stockSymbolList, symbol]
-        EncryptedStorage.setItem('stockSymbolList', JSON.stringify(newStockSymbolList))
+        SecureStoreHelper.save('stockSymbolList', JSON.stringify(newStockSymbolList))
         dispatch(setStockSymbolList(newStockSymbolList))
     }
 
@@ -57,7 +57,7 @@ export const removeStockSymbolList =
     (dispatch, getState) => {
         const stockSymbolList = selectStockSymbolList(getState())
         const newStockSymbolList = stockSymbolList.filter((s: string) => symbol !== s)
-        EncryptedStorage.setItem('stockSymbolList', JSON.stringify(newStockSymbolList))
+        SecureStoreHelper.save('stockSymbolList', JSON.stringify(newStockSymbolList))
         dispatch(setStockSymbolList(newStockSymbolList))
     }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, RefreshControl, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './styles'
 import useHomePageHooks from '../hooks/homePageHooks'
@@ -7,7 +7,8 @@ import { StockInfo } from 'store/reducer/home/homeSlice'
 import StockItem from './stockItem/stockItem'
 
 const HomePage = () => {
-    const { symbolInput, stockList, setSymbolInput, addStockSymbol } = useHomePageHooks()
+    const { symbolInput, refreshing, stockList, setSymbolInput, addStockSymbol, refreshHandler } =
+        useHomePageHooks()
 
     const renderItem = ({ item, index }: { item: StockInfo; index: number }) => (
         <StockItem item={item} index={index} />
@@ -35,7 +36,14 @@ const HomePage = () => {
                 <Text style={[styles.text, styles.textInfo]}>Change%</Text>
                 <Text style={[styles.text, styles.textInfo]}>Volume</Text>
             </View>
-            <FlatList data={stockList} renderItem={renderItem} keyExtractor={keyExtractor} />
+            <FlatList
+                data={stockList}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={refreshHandler} />
+                }
+            />
         </View>
     )
 }

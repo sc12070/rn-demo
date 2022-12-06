@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-        color: 'black'
+        color: 'black',
+        fontWeight: 'bold'
     },
     textInfo: {
         textAlign: 'right'

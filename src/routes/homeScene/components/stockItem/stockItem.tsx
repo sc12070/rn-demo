@@ -15,13 +15,15 @@ const StockItem = ({ item, index }: { item: StockInfo; index: number }) => {
             ? styles.priceChangePlus
             : styles.priceChangeMinus
 
+    const oddWrapper = index % 2 == 0 ? styles.oddWrapper : null
+
     return (
         <ScrollView
             contentContainerStyle={styles.swipeWrapper}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             pagingEnabled={true}>
-            <View style={[styles.stockItemWrapper, index % 2 == 0 ? styles.oddWrapper : null]}>
+            <View style={[styles.stockItemWrapper, oddWrapper]}>
                 <Text style={styles.text}>{symbol}</Text>
                 <Text numberOfLines={1} style={[styles.text, styles.textInfo, priceChangeStyle]}>
                     {price?.toFixed(2)}
@@ -36,7 +38,7 @@ const StockItem = ({ item, index }: { item: StockInfo; index: number }) => {
                     {volume}
                 </Text>
             </View>
-            <TouchableOpacity style={styles.deleteBtn} onPress={removeStockSymbol}>
+            <TouchableOpacity style={[styles.deleteBtn, oddWrapper]} onPress={removeStockSymbol}>
                 <Text style={styles.deleteBtnLabel}>X</Text>
             </TouchableOpacity>
         </ScrollView>

@@ -9,8 +9,11 @@ import {
 
 export default () => {
     const [symbolInput, setSymbolInput] = useState('')
+    const [refreshing, setRefreshing] = useState(false)
+
     const stockSymbolList = useAppSelector(selectStockSymbolList)
     const stockList = useAppSelector(selectStockList)
+
     const dispatch = useAppDispatch()
     let timerId: number
 
@@ -29,6 +32,12 @@ export default () => {
         }
     }, [stockSymbolList])
 
+    const refreshHandler = async () => {
+        setRefreshing(true)
+        await dispatch(getStoredStockSymbolList())
+        setRefreshing(false)
+    }
+
     const addStockSymbol = () => {
         if (symbolInput === '') {
             return
@@ -39,9 +48,11 @@ export default () => {
 
     return {
         symbolInput,
+        refreshing,
         stockList,
         setSymbolInput,
-        addStockSymbol
+        addStockSymbol,
+        refreshHandler
     }
 }
 
