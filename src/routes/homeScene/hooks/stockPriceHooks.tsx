@@ -48,6 +48,7 @@ export default (info: StockPriceInfo) => {
     }, [info])
 
     return {
+        price: `${price.toFixed(2)}`,
         change: isShowPriceUpdateStyle ? changeInUpdate : change,
         fadeAnim
     }

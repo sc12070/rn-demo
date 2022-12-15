@@ -16,8 +16,8 @@ const getPriceChangeStyle = (change: CHANGE) => {
 }
 
 const StockPrice = (stockPriceInfo: StockPriceInfo) => {
-    const { price, postfix } = stockPriceInfo
-    const { change, fadeAnim } = useStockPriceHooks(stockPriceInfo)
+    const { postfix } = stockPriceInfo
+    const { price, change, fadeAnim } = useStockPriceHooks(stockPriceInfo)
 
     const priceStyles = [
         styles.text,
@@ -28,7 +28,7 @@ const StockPrice = (stockPriceInfo: StockPriceInfo) => {
 
     return (
         <Animated.Text numberOfLines={1} style={priceStyles}>
-            {price?.toFixed(2)}
+            {price}
             {postfix}
         </Animated.Text>
     )

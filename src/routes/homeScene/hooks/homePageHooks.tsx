@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
 import { selectStockSymbolList, selectStockList } from 'store/reducer/home/homeSelector'
 import { useAppSelector, useAppDispatch } from 'store/hooks'
 import { fetchStockList, getStoredStockSymbolList } from 'store/reducer/home/homeActions'

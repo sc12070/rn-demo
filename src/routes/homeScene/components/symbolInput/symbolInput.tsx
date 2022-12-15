@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, RefreshControl, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { TextInput, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './styles'
 import useSymbolInputHooks from '../../hooks/symbolInputHooks'
@@ -11,7 +11,7 @@ const symbolInput = () => {
         <View style={styles.rowWrapper}>
             <TextInput
                 style={styles.input}
-                placeholder="Symbol"
+                placeholder="Symbol, e.g. GOOG"
                 value={symbolInput}
                 onChangeText={setSymbolInput}
             />
