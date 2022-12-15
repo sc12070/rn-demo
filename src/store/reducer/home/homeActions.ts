@@ -9,7 +9,7 @@ import { selectStockSymbolList } from './homeSelector'
 export const getStoredStockSymbolList = createAsyncThunk('getStoredStockSymbolList', async () => {
     try {
         const session = await SecureStoreHelper.getWithAuth('stockSymbolList')
-        if (typeof session == 'string') {
+        if (typeof session === 'string') {
             return JSON.parse(session)
         } else {
             console.info('homeActions.getStoredStockSymbolList: no session found')

@@ -1,6 +1,5 @@
 import React from 'react'
-import { FlatList, RefreshControl, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { FlatList, RefreshControl, Text, View } from 'react-native'
 import styles from './styles'
 import useHomePageHooks from '../hooks/homePageHooks'
 import { StockInfo } from 'store/reducer/home/homeSlice'

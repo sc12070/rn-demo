@@ -14,12 +14,12 @@ const valuesOpacity = 0.7
 const valuesOpacityOnAfterChange = 0.1
 
 export default (info: StockPriceInfo) => {
-    const { price, change, shouldAnimated } = info
+    const { price, change } = info
 
     const [changeInUpdate, setChangeInUpdate] = useState<CHANGE>(CHANGE.Equal)
     const [isShowPriceUpdateStyle, setIsShowPriceUpdateStyle] = useState<boolean>(false)
 
-    const prevPriceRef = useRef<number>(price)
+    const prevPriceRef = useRef<number>(info.price)
     const fadeAnim = useRef(new Animated.Value(valuesOpacity)).current
 
     const fadeOut = useCallback(() => {
@@ -33,19 +33,20 @@ export default (info: StockPriceInfo) => {
             setIsShowPriceUpdateStyle(false)
             fadeAnim.setValue(valuesOpacity)
         })
-    }, [])
+    }, [fadeAnim])
 
     useEffect(() => {
+        const { shouldAnimated } = info
         if (!shouldAnimated) {
             return
         }
-        const _changeInUpdate = determindChange(price - prevPriceRef.current)
+        const _changeInUpdate = determindChange(info.price - prevPriceRef.current)
         if (_changeInUpdate !== CHANGE.Equal) {
             setChangeInUpdate(_changeInUpdate)
             fadeOut()
         }
-        prevPriceRef.current = price
-    }, [info])
+        prevPriceRef.current = info.price
+    }, [info, fadeOut])
 
     return {
         price: `${price?.toFixed(2) || ''}`,

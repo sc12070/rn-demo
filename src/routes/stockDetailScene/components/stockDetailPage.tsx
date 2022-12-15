@@ -9,7 +9,7 @@ type StockDetailPageProps = NativeStackScreenProps<StackParamList, 'StockDetail'
 const StockDetailPage = ({ route }: StockDetailPageProps) => {
     return (
         <View style={styles.bg}>
-            <Text style={{ color: 'black' }}>{route.params.symbol}</Text>
+            <Text style={styles.text}>{route.params.symbol}</Text>
         </View>
     )
 }

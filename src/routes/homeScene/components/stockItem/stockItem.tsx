@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, TouchableOpacity, View, Animated } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import useStockItemHooks from '../../hooks/stockItemHooks'
 import { StockInfo } from 'store/reducer/home/homeSlice'
@@ -17,7 +17,7 @@ const StockItem = ({ item, index }: { item: StockInfo; index: number }) => {
         toDetailPage
     } = useStockItemHooks(item)
 
-    const oddWrapper = index % 2 == 0 ? styles.oddWrapper : null
+    const oddWrapper = index % 2 === 0 ? styles.oddWrapper : null
 
     return (
         <ScrollView

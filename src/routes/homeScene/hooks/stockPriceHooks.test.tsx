@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react-hooks'
 import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
 
@@ -62,7 +62,7 @@ describe('Stock Price', () => {
         const hooks = renderHook(() => useStockPriceHooks(stockPrice), {
             wrapper: renderWrapper(store)
         })
-        const { result, waitForNextUpdate } = hooks
+        const { result } = hooks
         expect(result.current.price).toBe('100.00')
         expect(result.current.change).toBe(CHANGE.Down)
         stockPrice = {

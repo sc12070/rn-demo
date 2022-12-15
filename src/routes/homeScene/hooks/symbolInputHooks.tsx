@@ -14,7 +14,7 @@ export default () => {
         }
         dispatch(appendStockSymbolList(symbolInput.toUpperCase()))
         setSymbolInput('')
-    }, [symbolInput])
+    }, [dispatch, symbolInput])
 
     return {
         symbolInput,

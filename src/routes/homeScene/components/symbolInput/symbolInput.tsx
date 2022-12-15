@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './styles'
 import useSymbolInputHooks from '../../hooks/symbolInputHooks'
 
-const symbolInput = () => {
+const SymbolInput = () => {
     const { symbolInput, setSymbolInput, addStockSymbol } = useSymbolInputHooks()
 
     return (
@@ -22,4 +22,4 @@ const symbolInput = () => {
     )
 }
 
-export default symbolInput
+export default SymbolInput
