@@ -3,7 +3,16 @@ import RNSInfo from 'react-native-sensitive-info'
 const get = async (key: string) =>
     await RNSInfo.getItem(key, {
         sharedPreferencesName: 'rndemoSharedPrefs',
-        keychainService: 'redemokcs'
+        keychainService: 'redemokcs',
+        strings: {
+            header: 'Sign in',
+            description: 'We need your permission to retrieve stock list',
+            hint: 'Touch',
+            success: 'Fingerprint recognized',
+            notRecognized: 'Fingerprint not recognized, try again',
+            cancel: 'Cancel',
+            cancelled: 'Authentication was cancelled'
+        }
     })
 
 const getWithAuth = async (key: string) =>
@@ -13,8 +22,13 @@ const getWithAuth = async (key: string) =>
         touchID: true,
         showModal: true,
         strings: {
-            header: '',
-            description: 'We need your permission to retrieve stock list'
+            header: 'Sign in',
+            description: 'We need your permission to retrieve stock list',
+            hint: 'Touch',
+            success: 'Fingerprint recognized',
+            notRecognized: 'Fingerprint not recognized, try again',
+            cancel: 'Cancel',
+            cancelled: 'Authentication was cancelled'
         },
         kSecUseOperationPrompt: 'We need your permission to retrieve stock list'
     })
