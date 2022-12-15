@@ -17,3 +17,17 @@ Please enable screen lock & fingerprint (Setting -> Security -> Screen Lock/Fing
 ```
 yarn jest
 ```
+
+### Commit
+
+if the following error occured during commit
+
+```
+.husky/pre-commit: line 4: yarn: command not found
+```
+
+run
+
+```
+yarn export-huskyrc
+```
