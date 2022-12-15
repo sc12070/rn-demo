@@ -32,7 +32,7 @@ describe('Stock Item', () => {
         expect(result.current.priceChange).toBe(0.1)
         expect(result.current.priceChangePercent).toBe(10)
         expect(result.current.change).toBe(CHANGE.Up)
-        expect(result.current.volume).toBe('100K')
+        expect(result.current.volume).toBe('100.000K')
     })
 
     test('regular-market', () => {
@@ -60,7 +60,7 @@ describe('Stock Item', () => {
         expect(result.current.priceChange).toBe(-3)
         expect(result.current.priceChangePercent).toBe(-50.0)
         expect(result.current.change).toBe(CHANGE.Down)
-        expect(result.current.volume).toBe('10M')
+        expect(result.current.volume).toBe('10.000M')
     })
 
     test('post-market', () => {

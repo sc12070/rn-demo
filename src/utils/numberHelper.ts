@@ -6,9 +6,9 @@ interface ShortenNumber {
 
 export const shortenNumber: ShortenNumber = (input: number) => {
     if (input > 1000000) {
-        return `${(input / 1000000).toFixed(0)}M`
-    } else if (input > 1000) {
-        return `${(input / 1000).toFixed(0)}K`
+        return `${(input / 1000000).toFixed(3)}M`
+    } else if (input > 10000) {
+        return `${(input / 1000).toFixed(3)}K`
     }
     return `${input}`
 }
