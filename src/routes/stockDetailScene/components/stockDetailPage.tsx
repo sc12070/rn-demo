@@ -1,15 +1,12 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { StackParamList } from 'routes/routesType'
 import styles from './styles'
 
-interface Route {
-    params: {
-        symbol: string
-    }
-}
+type StockDetailPageProps = NativeStackScreenProps<StackParamList, 'StockDetail'>
 
-const StockDetailPage = ({ route }: { route: Route }) => {
+const StockDetailPage = ({ route }: StockDetailPageProps) => {
     return (
         <View style={styles.bg}>
             <Text style={{ color: 'black' }}>{route.params.symbol}</Text>

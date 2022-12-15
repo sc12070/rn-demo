@@ -1,9 +1,7 @@
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Stack from './routesType'
 import HomeScene from './homeScene'
 import StockDetailScene from './stockDetailScene'
-
-const Stack = createNativeStackNavigator()
 
 const Routes = () => {
     return (
