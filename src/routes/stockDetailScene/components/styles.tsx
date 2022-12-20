@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     text: {
-        color: 'black'
+        color: 'black',
+        height: 30
     }
 })
 

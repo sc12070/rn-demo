@@ -16,7 +16,7 @@ export interface StockInfoModel {
 }
 
 export interface IndicatorsModel {
-    close: Array<number>
+    close: Array<number | null>
     volume: Array<number>
 }
 
