@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { ChartInfoModel } from 'store/apiDataModel/home'
 
 export type StackParamList = {
     Home: undefined
     StockDetail: {
-        symbol: string
+        chartInfo: ChartInfoModel
     }
 }
 

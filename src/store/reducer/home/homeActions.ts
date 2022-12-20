@@ -37,7 +37,7 @@ export const fetchStockList = createAsyncThunk(
 
 export const fetchChart = createAsyncThunk('fetchChart', async (symbol: string) => {
     return await fetchRequest({
-        api: `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?metrics=high?&interval=1h&range=1d`,
+        api: `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?metrics=high?&interval=5m&range=1d`,
         method: 'GET'
     })
 })
