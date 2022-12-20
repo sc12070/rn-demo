@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import { useCallback, useState } from 'react'
 import { Alert } from 'react-native'
 import { ChartInfoModel } from 'store/apiDataModel/home'
@@ -9,6 +10,7 @@ export default () => {
     const [symbolInput, setSymbolInput] = useState('')
 
     const dispatch = useAppDispatch()
+    const navigation = useNavigation()
 
     const addStockSymbol = useCallback(async () => {
         if (symbolInput === '') {
@@ -17,17 +19,18 @@ export default () => {
         const rslt = await dispatch(fetchChart(symbolInput))
         const list = rslt.payload?.chart?.result as Array<ChartInfoModel>
         if (!list || list.length === 0) {
-            Alert.alert('Error', `Equity with symbol '${symbolInput}' not found`)
+            Alert.alert('', `Equity with symbol '${symbolInput}' not found`)
             return
         }
         const equityData = list.filter(d => d.meta.instrumentType === 'EQUITY')
         if (equityData.length > 0) {
             dispatch(appendStockSymbolList(symbolInput.toUpperCase()))
             setSymbolInput('')
+            navigation.navigate('StockDetail' as never, { chartInfo: equityData[0] } as never)
         } else {
             Alert.alert('Sorry', 'We only support equity now')
         }
-    }, [dispatch, symbolInput])
+    }, [dispatch, navigation, symbolInput])
 
     return {
         symbolInput,
