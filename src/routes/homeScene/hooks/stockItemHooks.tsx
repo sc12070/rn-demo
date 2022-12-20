@@ -10,8 +10,10 @@ export default (item: StockInfo) => {
     const { symbol } = item
 
     const [price, setPrice] = useState<number>(item.regularMarketPrice)
-    const [priceChange, setPriceChange] = useState<number>(0)
-    const [priceChangePercent, setPriceChangePercent] = useState<number>(0)
+    const [priceChange, setPriceChange] = useState<number>(item.regularMarketChange)
+    const [priceChangePercent, setPriceChangePercent] = useState<number>(
+        item.regularMarketChangePercent
+    )
     const [change, setChange] = useState<CHANGE>(CHANGE.Equal)
     const [volume, setVolume] = useState<string>(shortenNumber(item.regularMarketVolume || 0))
 
@@ -35,16 +37,20 @@ export default (item: StockInfo) => {
 
         switch (marketState) {
             case 'PRE':
-                setPrice(preMarketPrice)
-                setPriceChange(preMarketChange)
-                setPriceChangePercent(preMarketChangePercent)
-                setChange(determindChange(preMarketChange))
+                if (typeof preMarketPrice === 'number') {
+                    setPrice(preMarketPrice)
+                    setPriceChange(preMarketChange)
+                    setPriceChangePercent(preMarketChangePercent)
+                    setChange(determindChange(preMarketChange))
+                }
                 break
             case 'CLOSED':
-                setPrice(postMarketPrice)
-                setPriceChange(postMarketChange)
-                setPriceChangePercent(postMarketChangePercent)
-                setChange(determindChange(postMarketChange))
+                if (typeof postMarketPrice === 'number') {
+                    setPrice(postMarketPrice)
+                    setPriceChange(postMarketChange)
+                    setPriceChangePercent(postMarketChangePercent)
+                    setChange(determindChange(postMarketChange))
+                }
                 break
             default: // REGULAR
                 setPrice(regularMarketPrice)

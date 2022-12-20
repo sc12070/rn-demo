@@ -8,7 +8,7 @@ import { selectStockSymbolList } from './homeSelector'
 
 export const getStoredStockSymbolList = createAsyncThunk('getStoredStockSymbolList', async () => {
     try {
-        const session = await SecureStoreHelper.getWithAuth('stockSymbolList')
+        const session = await SecureStoreHelper.get('stockSymbolList')
         if (typeof session === 'string') {
             return JSON.parse(session)
         } else {
@@ -21,7 +21,7 @@ export const getStoredStockSymbolList = createAsyncThunk('getStoredStockSymbolLi
 })
 
 export const fetchStockList = createAsyncThunk(
-    'fetchRequest',
+    'fetchStockList',
     async (stockSymbolList: Array<string>) => {
         if (stockSymbolList.length < 1) {
             return {}
@@ -34,6 +34,13 @@ export const fetchStockList = createAsyncThunk(
         })
     }
 )
+
+export const fetchChart = createAsyncThunk('fetchChart', async (symbol: string) => {
+    return await fetchRequest({
+        api: `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?metrics=high?&interval=1h&range=1d`,
+        method: 'GET'
+    })
+})
 
 export const appendStockSymbolList =
     (symbol: string): AppThunk =>
