@@ -2,18 +2,18 @@ import React from 'react'
 import { FlatList, RefreshControl, Text, View } from 'react-native'
 import styles from './styles'
 import useHomePageHooks from '../hooks/homePageHooks'
-import { StockInfo } from 'store/reducer/home/homeSlice'
 import StockItem from './stockItem/stockItem'
 import SymbolInput from './symbolInput/symbolInput'
+import { StockInfoModel } from 'store/apiDataModel/home'
 
 const HomePage = () => {
     const { refreshing, stockList, refreshHandler } = useHomePageHooks()
 
-    const renderItem = ({ item, index }: { item: StockInfo; index: number }) => (
+    const renderItem = ({ item, index }: { item: StockInfoModel; index: number }) => (
         <StockItem item={item} index={index} />
     )
 
-    const keyExtractor = ({ symbol }: StockInfo) => symbol
+    const keyExtractor = ({ symbol }: StockInfoModel) => symbol
 
     return (
         <View style={styles.bg}>

@@ -2,10 +2,10 @@ import React from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import useStockItemHooks from '../../hooks/stockItemHooks'
-import { StockInfo } from 'store/reducer/home/homeSlice'
 import StockPrice from '../stockPrice/stockPrice'
+import { StockInfoModel } from 'store/apiDataModel/home'
 
-const StockItem = ({ item, index }: { item: StockInfo; index: number }) => {
+const StockItem = ({ item, index }: { item: StockInfoModel; index: number }) => {
     const {
         symbol,
         price,

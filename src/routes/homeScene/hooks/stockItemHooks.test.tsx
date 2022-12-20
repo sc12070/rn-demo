@@ -3,12 +3,12 @@ import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
 
 import useStockItemHooks from './stockItemHooks'
-import { StockInfo } from 'store/reducer/home/homeSlice'
 import { CHANGE } from 'constants'
+import { StockInfoModel } from 'store/apiDataModel/home'
 
 describe('Stock Item', () => {
     test('pre-market', () => {
-        const preStockInfo: StockInfo = {
+        const preStockInfo: StockInfoModel = {
             longName: 'apple',
             symbol: 'AAPL',
             preMarketPrice: 1.0,
@@ -36,7 +36,7 @@ describe('Stock Item', () => {
     })
 
     test('regular-market', () => {
-        const preStockInfo: StockInfo = {
+        const preStockInfo: StockInfoModel = {
             longName: 'apple',
             symbol: 'AAPL',
             preMarketPrice: 1.0,
