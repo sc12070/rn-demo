@@ -13,5 +13,9 @@ export const shortenNumber: ShortenNumber = (input: number) => {
     return `${input}`
 }
 
+export const toDecimal = (input: number, decimal: number = 2) => {
+    return Math.round(input * 10 ** decimal) / 10 ** decimal
+}
+
 export const determindChange = (priceChange: number) =>
     priceChange === 0 ? CHANGE.Equal : priceChange > 0 ? CHANGE.Up : CHANGE.Down

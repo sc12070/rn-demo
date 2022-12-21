@@ -1,71 +1,45 @@
-import { useCallback, useEffect, useState } from 'react'
-import { LineChartData } from 'react-native-chart-kit/dist/line-chart/LineChart'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
 import { ChartInfoModel } from 'store/apiDataModel/home'
+import { useAppDispatch } from 'store/hooks'
+import { fetchChart } from 'store/reducer/home/homeActions'
 
-export default (chartInfo: ChartInfoModel) => {
-    const [data, setData] = useState<LineChartData>({
-        labels: [],
-        datasets: []
-    })
+export default (info: ChartInfoModel) => {
+    const { meta, timestamp } = info
 
-    const { indicators, meta, timestamp } = chartInfo
-    const { symbol } = meta
-    const { close } = indicators.quote[0]
+    const [chartInfo, setChartInfo] = useState<ChartInfoModel>(info)
 
-    const fillNull = useCallback((input: Array<number | null>) => {
-        var output: Array<number | null> = [...input]
-        while (output.indexOf(null) !== -1) {
-            let idx = output.indexOf(null)
-            if (idx === 0 && !!output[1]) {
-                output[0] = output[1]
-            } else {
-                output[idx] = output[idx - 1]
-            }
+    const dispatch = useAppDispatch()
+
+    let timerId = useRef<ReturnType<typeof setInterval> | null>(null)
+
+    const fetchChartInfo = useCallback(async () => {
+        const rslt = await dispatch(fetchChart(meta.symbol))
+        const list = rslt.payload?.chart?.result as Array<ChartInfoModel>
+        const chartInfoList = list.filter(d => d.meta.instrumentType === 'EQUITY')
+        if (chartInfoList.length > 0) {
+            setChartInfo(chartInfoList[0])
         }
-        return output as Array<number>
-    }, [])
-
-    const calMinMaxBuffer = useCallback((list: Array<number>) => {
-        let minBuffer = Math.min(...list)
-        let maxBuffer = Math.max(...list)
-        let minMaxDiff = (maxBuffer - minBuffer) * 0.2
-        return [minBuffer - minMaxDiff, maxBuffer + minMaxDiff]
-    }, [])
+    }, [dispatch, meta.symbol])
 
     useEffect(() => {
-        let closeIndicatorList = fillNull(close)
-        let minMax: number[] = calMinMaxBuffer(closeIndicatorList)
+        if (timestamp.length === 0) {
+            fetchChartInfo()
+            console.log('undefined')
+        }
+        const id = setInterval(() => {
+            fetchChartInfo()
+        }, 6000)
+        timerId.current = id
 
-        setData({
-            labels: timestamp.map(t => {
-                let d = new Date(t * 1000)
-                let min = d.getMinutes()
-                if (min === 0) {
-                    return `${d.getHours()}:${d.getMinutes()}0`
-                } else {
-                    return ''
-                }
-            }),
-            datasets: [
-                {
-                    data: closeIndicatorList,
-                    strokeWidth: 2,
-                    withDots: false
-                },
-                {
-                    data: minMax,
-                    color: () => 'transparent',
-                    strokeWidth: 0,
-                    withDots: false
-                }
-            ]
-        })
-    }, [close, timestamp, fillNull, calMinMaxBuffer])
+        return () => {
+            if (timerId.current !== null) {
+                clearInterval(timerId.current)
+            }
+        }
+    }, [fetchChartInfo, timestamp])
 
     return {
-        symbol,
-        data
+        chartInfo
     }
 }
-
-//https://query1.finance.yahoo.com/v11/finance/quoteSummary/aapl?modules=financialData

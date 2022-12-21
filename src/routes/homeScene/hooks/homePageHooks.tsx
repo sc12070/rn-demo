@@ -43,5 +43,3 @@ export default () => {
         refreshHandler
     }
 }
-
-//https://query1.finance.yahoo.com/v11/finance/quoteSummary/aapl?modules=financialData

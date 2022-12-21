@@ -7,9 +7,18 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         backgroundColor: 'white'
     },
+    priceWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     text: {
         color: 'black',
         height: 30
+    },
+    title: {
+        height: 40,
+        fontSize: 24,
+        fontWeight: '700'
     }
 })
 

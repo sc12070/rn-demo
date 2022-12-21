@@ -1,37 +1,31 @@
 import React from 'react'
-import { Dimensions, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+
 import { StackParamList } from 'routes/routesType'
 import styles from './styles'
-import { LineChart } from 'react-native-chart-kit'
 import useStockDetailPage from '../hooks/stockDetailPage'
+import StockChart from './stockChart/stockChart'
 
 type StockDetailPageProps = NativeStackScreenProps<StackParamList, 'StockDetail'>
 
 const StockDetailPage = ({ route }: StockDetailPageProps) => {
-    const { symbol, data } = useStockDetailPage(route.params.chartInfo)
+    const { chartInfo } = useStockDetailPage(route.params?.chartInfo)
+
+    const { indicators, meta, timestamp } = chartInfo
+    const { close } = indicators.quote[0]
+    const { symbol, regularMarketPrice, previousClose, exchangeName } = meta
 
     return (
         <View style={styles.bg}>
-            <Text style={styles.text}>{symbol}</Text>
-            <LineChart
-                data={data}
-                width={Dimensions.get('window').width - 20}
-                height={220}
-                withInnerLines={false}
-                withShadow={false}
-                chartConfig={{
-                    backgroundColor: '#FFF',
-                    backgroundGradientFrom: '#EEE',
-                    backgroundGradientTo: '#FFF',
-                    decimalPlaces: 2,
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    style: {
-                        borderRadius: 16
-                    }
-                }}
-            />
+            <Text style={[styles.text, styles.title]}>{symbol}</Text>
+            <View style={styles.priceWrapper}>
+                <Text style={styles.text}>${regularMarketPrice}</Text>
+                <Text style={styles.text}>prev. ${previousClose}</Text>
+                <View />
+            </View>
+            <Text style={styles.text}>Exchange: {exchangeName}</Text>
+            <StockChart close={close} timestamp={timestamp} />
         </View>
     )
 }

@@ -3,7 +3,7 @@ import { CHANGE } from 'constants'
 import { useCallback, useEffect, useState } from 'react'
 import { ChartInfoModel, StockInfoModel } from 'store/apiDataModel/home'
 import { useAppDispatch } from 'store/hooks'
-import { fetchChart, removeStockSymbolList } from 'store/reducer/home/homeActions'
+import { removeStockSymbolList } from 'store/reducer/home/homeActions'
 import { determindChange, shortenNumber } from 'utils/numberHelper'
 
 export default (item: StockInfoModel) => {
@@ -67,13 +67,20 @@ export default (item: StockInfoModel) => {
     }, [dispatch, symbol])
 
     const toDetailPage = useCallback(async () => {
-        const rslt = await dispatch(fetchChart(symbol))
-        const list = rslt.payload?.chart?.result as Array<ChartInfoModel>
-        const chartInfoList = list.filter(d => d.meta.instrumentType === 'EQUITY')
-        if (chartInfoList.length > 0) {
-            navigation.navigate('StockDetail' as never, { chartInfo: chartInfoList[0] } as never)
+        const chartInfo: ChartInfoModel = {
+            indicators: {
+                quote: [{ close: [], volume: [] }]
+            },
+            meta: {
+                symbol: symbol,
+                instrumentType: '',
+                previousClose: 0,
+                regularMarketPrice: 0
+            },
+            timestamp: []
         }
-    }, [dispatch, navigation, symbol])
+        navigation.navigate('StockDetail' as never, { chartInfo: chartInfo } as never)
+    }, [navigation, symbol])
 
     return {
         symbol,

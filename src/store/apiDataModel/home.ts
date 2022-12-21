@@ -27,7 +27,9 @@ export interface ChartInfoModel {
     meta: {
         symbol: string
         instrumentType: string
+        previousClose: number
         regularMarketPrice: number
+        exchangeName?: string
     }
     timestamp: Array<number>
 }
