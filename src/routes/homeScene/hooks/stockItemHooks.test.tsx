@@ -64,7 +64,7 @@ describe('Stock Item', () => {
     })
 
     test('post-market', () => {
-        const preStockInfo: StockInfo = {
+        const preStockInfo: StockInfoModel = {
             longName: 'apple',
             symbol: 'AAPL',
             preMarketPrice: 1.0,

@@ -14,6 +14,7 @@ const SymbolInput = () => {
                 placeholder="Symbol, e.g. GOOG"
                 value={symbolInput}
                 onChangeText={setSymbolInput}
+                clearButtonMode="always"
             />
             <TouchableOpacity style={styles.searchBtn} onPress={() => addStockSymbol()}>
                 <Icon name="search" size={30} color="#BBB" />
