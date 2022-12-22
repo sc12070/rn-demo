@@ -27,7 +27,7 @@ export default (close: Array<number | null>, timestamp: Array<number>) => {
     }, [])
 
     const getTimeRange = useCallback((start: number) => {
-        return { min: start, max: start + 28800 }
+        return { min: start, max: start + 25200 }
     }, [])
 
     const xAxisFormatter = useCallback((value: number) => {

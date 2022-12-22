@@ -45,11 +45,6 @@ export const fetchChart = createAsyncThunk('fetchChart', async (symbol: string) 
 export const appendStockSymbolList =
     (symbol: string): AppThunk =>
     (dispatch, getState) => {
-        if (symbol === 'DELETE_ALL') {
-            SecureStoreHelper.remove('stockSymbolList')
-            dispatch(setStockSymbolList([]))
-            return
-        }
         const stockSymbolList = selectStockSymbolList(getState())
         if (stockSymbolList.includes(symbol)) {
             return

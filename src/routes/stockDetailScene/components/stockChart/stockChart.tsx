@@ -54,7 +54,7 @@ const StockChart = ({
                     }
                 }}
             />
-            <HorizontalAxis tickCount={9} theme={{ labels: { formatter: xAxisFormatter } }} />
+            <HorizontalAxis tickCount={8} theme={{ labels: { formatter: xAxisFormatter } }} />
             <Line
                 data={dataForLinechart}
                 smoothing="none"

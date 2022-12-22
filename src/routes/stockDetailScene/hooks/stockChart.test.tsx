@@ -18,7 +18,7 @@ describe('Stock Detail', () => {
         expect(result.current.xAxisFormatter(1671546600)).toBe('14:30')
         expect(result.current.yAxisFormatter(2.123124)).toBe('2.12')
         expect(result.current.tooltipFormatter({ x: 1671546600, y: 2.123124 })).toBe('14:30 $2.12')
-        expect(result.current.xAxisDomon).toStrictEqual({ min: 1671546600, max: 1671575400 })
+        expect(result.current.xAxisDomon).toStrictEqual({ min: 1671546600, max: 1671571800 })
         expect(result.current.yAxisDomon).toStrictEqual({ min: 0.9200000000000002, max: 2.18 })
         expect(result.current.dataForLinechart).toStrictEqual([
             {
