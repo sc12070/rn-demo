@@ -1,5 +1,7 @@
 # rn-demo
 
+![](./doc/demo.gif)
+
 ### Installation
 
 ```
