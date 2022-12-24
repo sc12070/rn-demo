@@ -1,8 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
-
-import useStockPriceHooks, { StockPriceInfo } from './stockPriceHooks'
+import useStockPriceHooks, { StockPriceInfo } from './useStockPriceHooks'
 import { CHANGE } from 'constants'
 
 describe('Stock Price', () => {

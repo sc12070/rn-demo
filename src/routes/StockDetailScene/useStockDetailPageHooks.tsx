@@ -25,7 +25,6 @@ export default (info: ChartInfoModel) => {
     useEffect(() => {
         if (timestamp.length === 0) {
             fetchChartInfo()
-            console.log('undefined')
         }
         const id = setInterval(() => {
             fetchChartInfo()

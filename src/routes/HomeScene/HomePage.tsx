@@ -1,9 +1,9 @@
 import React from 'react'
 import { FlatList, RefreshControl, Text, View } from 'react-native'
 import styles from './styles'
-import useHomePageHooks from '../hooks/homePageHooks'
-import StockItem from './stockItem/stockItem'
-import SymbolInput from './symbolInput/symbolInput'
+import useHomePageHooks from './useHomePageHooks'
+import StockItem from './components/StockItem/StockItem'
+import SymbolInput from './components/SymbolInput/SymbolInput'
 import { StockInfoModel } from 'store/apiDataModel/home'
 
 const HomePage = () => {

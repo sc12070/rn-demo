@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
 
-import useStockChart from './stockChart'
+import useStockChart from './useStockChartHooks'
 
 describe('Stock Detail', () => {
     test('chart', async () => {

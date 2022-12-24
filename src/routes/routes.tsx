@@ -1,7 +1,7 @@
 import React from 'react'
 import Stack from './routesType'
-import HomeScene from './homeScene'
-import StockDetailScene from './stockDetailScene'
+import HomeScene from './HomeScene/HomePage'
+import StockDetailScene from './StockDetailScene/StockDetailPage'
 
 const Routes = () => {
     return (

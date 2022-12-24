@@ -4,8 +4,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { StackParamList } from 'routes/routesType'
 import styles from './styles'
-import useStockDetailPage from '../hooks/stockDetailPage'
-import StockChart from './stockChart/stockChart'
+import useStockDetailPage from './useStockDetailPageHooks'
+import StockChart from './components/StockChart/StockChart'
 
 type StockDetailPageProps = NativeStackScreenProps<StackParamList, 'StockDetail'>
 
