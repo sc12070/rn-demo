@@ -1,11 +1,11 @@
 import React from 'react'
-import { Dimensions, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import useStockItemHooks from './useStockItemHooks'
 import StockPrice from '../StockPrice/StockPrice'
 import { StockInfoModel } from 'store/apiDataModel/home'
 
-const snapToInterval = Dimensions.get('window').width * 0.5
+const snapToInterval = Dimensions.get('window').width * (Platform.OS === 'ios' ? 0.1 : 0.5)
 
 const StockItem = ({ item, index }: { item: StockInfoModel; index: number }) => {
     const {
