@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { StockInfoModel } from 'store/apiDataModel/home'
+import { IStockInfo } from 'store/apiDataModel/home'
 import homeActions, { fetchStockList, getStoredStockSymbolList } from './homeActions'
 
-export interface HomeState {
+export interface IHomeState {
     stockSymbolList: Array<string>
-    stockList: Array<StockInfoModel>
+    stockList: Array<IStockInfo>
 }
 
-const initialState: HomeState = {
+const initialState: IHomeState = {
     stockSymbolList: [],
     stockList: []
 }

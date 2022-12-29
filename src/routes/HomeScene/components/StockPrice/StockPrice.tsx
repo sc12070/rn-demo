@@ -1,7 +1,7 @@
 import React from 'react'
 import { Animated } from 'react-native'
 import styles from './styles'
-import useStockPriceHooks, { StockPriceInfo } from './useStockPriceHooks'
+import useStockPriceHooks, { IStockPriceInfo } from './useStockPriceHooks'
 import { CHANGE } from 'constants'
 
 const getPriceChangeStyle = (change: CHANGE) => {
@@ -15,7 +15,7 @@ const getPriceChangeStyle = (change: CHANGE) => {
     }
 }
 
-const StockPrice = (stockPriceInfo: StockPriceInfo) => {
+const StockPrice = (stockPriceInfo: IStockPriceInfo) => {
     const { postfix } = stockPriceInfo
     const { price, change, fadeAnim } = useStockPriceHooks(stockPriceInfo)
 

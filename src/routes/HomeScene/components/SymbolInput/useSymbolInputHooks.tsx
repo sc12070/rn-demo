@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { useCallback, useState } from 'react'
 import { Alert } from 'react-native'
-import { ChartInfoModel } from 'store/apiDataModel/home'
+import { IChartInfo } from 'store/apiDataModel/home'
 
 import { useAppDispatch } from 'store/hooks'
 import { appendStockSymbolList, fetchChart } from 'store/reducer/home/homeActions'
@@ -17,7 +17,7 @@ export default () => {
             return
         }
         const rslt = await dispatch(fetchChart(symbolInput))
-        const list = rslt.payload?.chart?.result as Array<ChartInfoModel>
+        const list = rslt.payload?.chart?.result as Array<IChartInfo>
         if (!list || list.length === 0) {
             Alert.alert('', `Equity with symbol '${symbolInput}' not found`)
             return

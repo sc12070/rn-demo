@@ -1,11 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 
-interface Props {
+interface IProps {
     children: React.ReactNode
 }
 
 export const renderWrapper =
     (store: any) =>
-    ({ children }: Props) =>
+    ({ children }: IProps) =>
         <Provider store={store}>{children}</Provider>

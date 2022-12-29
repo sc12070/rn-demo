@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { ChartInfoModel } from 'store/apiDataModel/home'
+import { IChartInfo } from 'store/apiDataModel/home'
 import { useAppDispatch } from 'store/hooks'
 import { fetchChart } from 'store/reducer/home/homeActions'
 
-export default (info: ChartInfoModel) => {
+export default (info: IChartInfo) => {
     const { meta, timestamp } = info
 
-    const [chartInfo, setChartInfo] = useState<ChartInfoModel>(info)
+    const [chartInfo, setChartInfo] = useState<IChartInfo>(info)
 
     const dispatch = useAppDispatch()
 
@@ -15,7 +15,7 @@ export default (info: ChartInfoModel) => {
 
     const fetchChartInfo = useCallback(async () => {
         const rslt = await dispatch(fetchChart(meta.symbol))
-        const list = rslt.payload?.chart?.result as Array<ChartInfoModel>
+        const list = rslt.payload?.chart?.result as Array<IChartInfo>
         const chartInfoList = list.filter(d => d.meta.instrumentType === 'EQUITY')
         if (chartInfoList.length > 0) {
             setChartInfo(chartInfoList[0])

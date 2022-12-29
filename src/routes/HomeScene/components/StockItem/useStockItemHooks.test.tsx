@@ -4,11 +4,11 @@ import { store } from 'store/store'
 
 import useStockItemHooks from './useStockItemHooks'
 import { CHANGE } from 'constants'
-import { StockInfoModel } from 'store/apiDataModel/home'
+import { IStockInfo } from 'store/apiDataModel/home'
 
 describe('Stock Item', () => {
     test('pre-market', () => {
-        const preStockInfo: StockInfoModel = {
+        const preStockInfo: IStockInfo = {
             longName: 'apple',
             symbol: 'AAPL',
             preMarketPrice: 1.0,
@@ -36,7 +36,7 @@ describe('Stock Item', () => {
     })
 
     test('regular-market', () => {
-        const preStockInfo: StockInfoModel = {
+        const preStockInfo: IStockInfo = {
             longName: 'apple',
             symbol: 'AAPL',
             preMarketPrice: 1.0,
@@ -64,7 +64,7 @@ describe('Stock Item', () => {
     })
 
     test('post-market', () => {
-        const preStockInfo: StockInfoModel = {
+        const preStockInfo: IStockInfo = {
             longName: 'apple',
             symbol: 'AAPL',
             preMarketPrice: 1.0,

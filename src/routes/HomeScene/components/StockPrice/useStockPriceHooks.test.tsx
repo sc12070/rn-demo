@@ -1,12 +1,12 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
-import useStockPriceHooks, { StockPriceInfo } from './useStockPriceHooks'
+import useStockPriceHooks, { IStockPriceInfo } from './useStockPriceHooks'
 import { CHANGE } from 'constants'
 
 describe('Stock Price', () => {
     test('receive higher price', async () => {
-        let stockPrice: StockPriceInfo = {
+        let stockPrice: IStockPriceInfo = {
             price: 100,
             change: CHANGE.Equal,
             shouldAnimated: true
@@ -30,7 +30,7 @@ describe('Stock Price', () => {
     })
 
     test('receive lower price', async () => {
-        let stockPrice: StockPriceInfo = {
+        let stockPrice: IStockPriceInfo = {
             price: 100,
             change: CHANGE.Up,
             shouldAnimated: true
@@ -54,7 +54,7 @@ describe('Stock Price', () => {
     })
 
     test('without animation', async () => {
-        let stockPrice: StockPriceInfo = {
+        let stockPrice: IStockPriceInfo = {
             price: 100,
             change: CHANGE.Down
         }

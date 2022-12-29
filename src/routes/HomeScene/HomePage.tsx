@@ -4,16 +4,16 @@ import styles from './styles'
 import useHomePageHooks from './useHomePageHooks'
 import StockItem from './components/StockItem/StockItem'
 import SymbolInput from './components/SymbolInput/SymbolInput'
-import { StockInfoModel } from 'store/apiDataModel/home'
+import { IStockInfo } from 'store/apiDataModel/home'
 
 const HomePage = () => {
     const { refreshing, stockList, refreshHandler } = useHomePageHooks()
 
-    const renderItem = ({ item, index }: { item: StockInfoModel; index: number }) => (
+    const renderItem = ({ item, index }: { item: IStockInfo; index: number }) => (
         <StockItem item={item} index={index} />
     )
 
-    const keyExtractor = ({ symbol }: StockInfoModel) => symbol
+    const keyExtractor = ({ symbol }: IStockInfo) => symbol
 
     return (
         <View style={styles.bg}>

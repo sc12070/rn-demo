@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import { CHANGE } from 'constants'
 import { useCallback, useEffect, useState } from 'react'
-import { ChartInfoModel, StockInfoModel } from 'store/apiDataModel/home'
+import { IChartInfo, IStockInfo } from 'store/apiDataModel/home'
 import { useAppDispatch } from 'store/hooks'
 import { removeStockSymbolList } from 'store/reducer/home/homeActions'
 import { determindChange, shortenNumber } from 'utils/numberHelper'
 
-export default (item: StockInfoModel) => {
+export default (item: IStockInfo) => {
     const { symbol } = item
 
     const [price, setPrice] = useState<number>(item.regularMarketPrice)
@@ -67,7 +67,7 @@ export default (item: StockInfoModel) => {
     }, [dispatch, symbol])
 
     const toDetailPage = useCallback(async () => {
-        const chartInfo: ChartInfoModel = {
+        const chartInfo: IChartInfo = {
             indicators: {
                 quote: [{ close: [], volume: [] }]
             },

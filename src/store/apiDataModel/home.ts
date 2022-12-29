@@ -1,4 +1,4 @@
-export interface StockInfoModel {
+export interface IStockInfo {
     longName: string
     symbol: string
     preMarketPrice: number
@@ -15,14 +15,14 @@ export interface StockInfoModel {
     marketState: string
 }
 
-export interface IndicatorsModel {
+export interface IIndicators {
     close: Array<number | null>
     volume: Array<number>
 }
 
-export interface ChartInfoModel {
+export interface IChartInfo {
     indicators: {
-        quote: Array<IndicatorsModel>
+        quote: Array<IIndicators>
     }
     meta: {
         symbol: string

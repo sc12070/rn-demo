@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { Animated } from 'react-native'
 import { determindChange } from 'utils/numberHelper'
 
-export interface StockPriceInfo {
+export interface IStockPriceInfo {
     price: number
     change: CHANGE
     shouldAnimated?: boolean
@@ -13,7 +13,7 @@ export interface StockPriceInfo {
 const valuesOpacity = 0.7
 const valuesOpacityOnAfterChange = 0.1
 
-export default (info: StockPriceInfo) => {
+export default (info: IStockPriceInfo) => {
     const { price, change } = info
 
     const [changeInUpdate, setChangeInUpdate] = useState<CHANGE>(CHANGE.Equal)

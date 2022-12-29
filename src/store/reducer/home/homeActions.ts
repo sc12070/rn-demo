@@ -3,7 +3,7 @@ import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import SecureStoreHelper from 'utils/secureStoreHelper'
 import { fetchRequest } from 'utils/fetchHelper'
 import { AppThunk } from 'store/store'
-import { HomeState, setStockSymbolList } from './homeSlice'
+import { IHomeState, setStockSymbolList } from './homeSlice'
 import { selectStockSymbolList } from './homeSelector'
 
 export const getStoredStockSymbolList = createAsyncThunk('getStoredStockSymbolList', async () => {
@@ -64,7 +64,7 @@ export const removeStockSymbolList =
     }
 
 export default {
-    setStockSymbolList: (state: HomeState, action: PayloadAction<Array<string>>) => {
+    setStockSymbolList: (state: IHomeState, action: PayloadAction<Array<string>>) => {
         state.stockSymbolList = action.payload
     }
 }

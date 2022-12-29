@@ -1,9 +1,9 @@
-interface Params {
+interface IParams {
     api: string
     method: string
 }
 
-export const fetchRequest = async (params: Params) => {
+export const fetchRequest = async (params: IParams) => {
     try {
         console.log('fetchRequest request', params)
         const { api, method = 'GET' } = params

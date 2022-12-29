@@ -1,10 +1,10 @@
 import { CHANGE } from 'constants'
 
-interface ShortenNumber {
+interface IShortenNumber {
     (input: number): string
 }
 
-export const shortenNumber: ShortenNumber = (input: number) => {
+export const shortenNumber: IShortenNumber = (input: number) => {
     if (input > 1000000) {
         return `${(input / 1000000).toFixed(3)}M`
     } else if (input > 10000) {
