@@ -1,14 +1,21 @@
 interface IParams {
     api: string
-    method: string
+    query?: Array<string>
+    method?: string
+    controller?: AbortController
 }
 
 export const fetchRequest = async (params: IParams) => {
     try {
-        console.log('fetchRequest request', params)
-        const { api, method = 'GET' } = params
-        const rslt = await fetch(api, {
-            method
+        const { api, query, method = 'GET', controller } = params
+        console.log('fetchRequest request', api)
+        let apiUrl = api
+        if (query !== undefined && query.length > 0) {
+            apiUrl = `${api}?${query.join('&')}`
+        }
+        const rslt = await fetch(apiUrl, {
+            method,
+            signal: controller?.signal
         })
         if (rslt?.status !== 200) {
             console.error('fetchRequest status error', rslt)
@@ -21,7 +28,7 @@ export const fetchRequest = async (params: IParams) => {
         console.log(`fetchRequest success, ${api}`, response)
         return response
     } catch (e) {
-        console.error('fetchRequest error', e)
+        console.warn('fetchRequest fail', e)
         throw e
     }
 }

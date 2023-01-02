@@ -30,17 +30,8 @@ export const homeSlice = createSlice({
                     state.stockSymbolList = action.payload as Array<string>
                 }
             })
-            .addCase(getStoredStockSymbolList.rejected, (state, action) => {
-                console.warn(action.payload)
-                // TODO: pop up error msg
-            })
-
             .addCase(fetchStockList.fulfilled, (state, action) => {
                 state.stockList = action.payload?.quoteResponse?.result
-            })
-            .addCase(fetchStockList.rejected, (state, action) => {
-                console.warn(action.payload)
-                // TODO: pop up error msg
             })
     }
 })
@@ -68,20 +59,22 @@ export const fetchStockList = createAsyncThunk(
             return {}
         }
         return await fetchRequest({
-            api: `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${stockSymbolList.join(
-                ','
-            )}`,
-            method: 'GET'
+            api: 'https://query1.finance.yahoo.com/v7/finance/quote',
+            query: [`symbols=${stockSymbolList.join(',')}`]
         })
     }
 )
 
-export const fetchChart = createAsyncThunk('fetchChart', async (symbol: string) => {
-    return await fetchRequest({
-        api: `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?metrics=high?&interval=1m&range=1d`,
-        method: 'GET'
-    })
-})
+export const fetchChart = createAsyncThunk(
+    'fetchChart',
+    async ({ symbol, controller }: { symbol: string; controller: AbortController }) => {
+        return await fetchRequest({
+            api: `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`,
+            query: ['metrics=high?&interval=1m&range=1d'],
+            controller
+        })
+    }
+)
 
 export const appendStockSymbolList =
     (symbol: string): AppThunk =>

@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
 
-import useStockItemHooks from './useStockItemHooks'
+import useStockItemHooks from '../useStockItemHooks'
 import { CHANGE } from 'constants'
 import { IStockInfo } from 'store/apiDataModel/home'
 

@@ -13,25 +13,33 @@ export default (info: IChartInfo) => {
 
     let timerId = useRef<ReturnType<typeof setInterval> | null>(null)
 
-    const fetchChartInfo = useCallback(async () => {
-        const rslt = await dispatch(fetchChart(meta.symbol))
-        const list = rslt.payload?.chart?.result as Array<IChartInfo>
-        const chartInfoList = list.filter(d => d.meta.instrumentType === 'EQUITY')
-        if (chartInfoList.length > 0) {
-            setChartInfo(chartInfoList[0])
-        }
-    }, [dispatch, meta.symbol])
+    const fetchChartInfo = useCallback(
+        async (controller: AbortController) => {
+            const rslt = await dispatch(fetchChart({ symbol: meta.symbol, controller }))
+            const list = rslt.payload?.chart?.result as Array<IChartInfo>
+            if (list === undefined) {
+                return
+            }
+            const chartInfoList = list.filter(d => d.meta.instrumentType === 'EQUITY')
+            if (chartInfoList.length > 0) {
+                setChartInfo(chartInfoList[0])
+            }
+        },
+        [dispatch, meta.symbol]
+    )
 
     useEffect(() => {
+        const controller = new AbortController()
         if (timestamp.length === 0) {
-            fetchChartInfo()
+            fetchChartInfo(controller)
         }
         const id = setInterval(() => {
-            fetchChartInfo()
+            fetchChartInfo(controller)
         }, 6000)
         timerId.current = id
 
         return () => {
+            controller.abort()
             if (timerId.current !== null) {
                 clearInterval(timerId.current)
             }
