@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { selectStockSymbolList, selectStockList } from 'store/reducer/home/homeSelector'
 import { useAppSelector, useAppDispatch } from 'store/hooks'
-import { fetchStockList, getStoredStockSymbolList } from 'store/reducer/home/homeActions'
+import { fetchStockList, getStoredStockSymbolList } from 'store/reducer/home/homeSlice'
 
 export default () => {
     const [refreshing, setRefreshing] = useState(false)

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { IChartInfo } from 'store/apiDataModel/home'
 import { useAppDispatch } from 'store/hooks'
-import { fetchChart } from 'store/reducer/home/homeActions'
+import { fetchChart } from 'store/reducer/home/homeSlice'
 
 export default (info: IChartInfo) => {
     const { meta, timestamp } = info

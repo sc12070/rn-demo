@@ -4,7 +4,7 @@ import { Alert } from 'react-native'
 import { IChartInfo } from 'store/apiDataModel/home'
 
 import { useAppDispatch } from 'store/hooks'
-import { appendStockSymbolList, fetchChart } from 'store/reducer/home/homeActions'
+import { appendStockSymbolList, fetchChart } from 'store/reducer/home/homeSlice'
 
 export default () => {
     const [symbolInput, setSymbolInput] = useState('')

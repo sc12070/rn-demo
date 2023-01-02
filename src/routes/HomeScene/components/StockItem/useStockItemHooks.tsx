@@ -3,7 +3,7 @@ import { CHANGE } from 'constants'
 import { useCallback, useEffect, useState } from 'react'
 import { IChartInfo, IStockInfo } from 'store/apiDataModel/home'
 import { useAppDispatch } from 'store/hooks'
-import { removeStockSymbolList } from 'store/reducer/home/homeActions'
+import { removeStockSymbolList } from 'store/reducer/home/homeSlice'
 import { determindChange, shortenNumber } from 'utils/numberHelper'
 
 export default (item: IStockInfo) => {
