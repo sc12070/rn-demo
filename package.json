@@ -54,7 +54,7 @@
     },
     "jest": {
         "setupFiles": [
-            "./mock/mock.js"
+            "./__mock__/mock.js"
         ],
         "preset": "react-native",
         "moduleFileExtensions": [

@@ -1,66 +1,63 @@
 import { useNavigation } from '@react-navigation/native'
 import { CHANGE } from 'constants'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import { IChartInfo, IStockInfo } from 'store/apiDataModel/home'
 import { useAppDispatch } from 'store/hooks'
 import { removeStockSymbolList } from 'store/reducer/home/homeSlice'
 import { determindChange, shortenNumber } from 'utils/numberHelper'
 
 export default (item: IStockInfo) => {
-    const { symbol } = item
+    const {
+        symbol,
+        preMarketPrice,
+        preMarketChange,
+        preMarketChangePercent,
+        regularMarketPrice,
+        regularMarketChange,
+        regularMarketChangePercent,
+        regularMarketVolume,
+        postMarketPrice,
+        postMarketChange,
+        postMarketChangePercent,
+        marketState
+    } = item
 
-    const [price, setPrice] = useState<number>(item.regularMarketPrice)
-    const [priceChange, setPriceChange] = useState<number>(item.regularMarketChange)
-    const [priceChangePercent, setPriceChangePercent] = useState<number>(
-        item.regularMarketChangePercent
+    const price = useMemo<number>(() => {
+        if (marketState === 'PRE' && typeof preMarketPrice === 'number') {
+            return preMarketPrice
+        } else if (marketState === 'CLOSED' && typeof postMarketPrice === 'number') {
+            return postMarketPrice
+        }
+        return regularMarketPrice
+    }, [preMarketPrice, regularMarketPrice, postMarketPrice, marketState])
+
+    const priceChange = useMemo<number>(() => {
+        if (marketState === 'PRE' && typeof preMarketChange === 'number') {
+            return preMarketChange
+        } else if (marketState === 'CLOSED' && typeof postMarketChange === 'number') {
+            return postMarketChange
+        }
+        return regularMarketChange
+    }, [preMarketChange, regularMarketChange, postMarketChange, marketState])
+
+    const priceChangePercent = useMemo<number>(() => {
+        if (marketState === 'PRE' && typeof preMarketChangePercent === 'number') {
+            return preMarketChangePercent
+        } else if (marketState === 'CLOSED' && typeof postMarketChangePercent === 'number') {
+            return postMarketChangePercent
+        }
+        return regularMarketChangePercent
+    }, [preMarketChangePercent, regularMarketChangePercent, postMarketChangePercent, marketState])
+
+    const change = useMemo<CHANGE>(() => determindChange(priceChange), [priceChange])
+
+    const volume = useMemo<string>(
+        () => shortenNumber(regularMarketVolume || 0),
+        [regularMarketVolume]
     )
-    const [change, setChange] = useState<CHANGE>(CHANGE.Equal)
-    const [volume, setVolume] = useState<string>(shortenNumber(item.regularMarketVolume || 0))
 
     const dispatch = useAppDispatch()
     const navigation = useNavigation()
-
-    useEffect(() => {
-        const {
-            preMarketPrice,
-            preMarketChange,
-            preMarketChangePercent,
-            regularMarketPrice,
-            regularMarketChange,
-            regularMarketChangePercent,
-            regularMarketVolume,
-            postMarketPrice,
-            postMarketChange,
-            postMarketChangePercent,
-            marketState
-        } = item
-
-        switch (marketState) {
-            case 'PRE':
-                if (typeof preMarketPrice === 'number') {
-                    setPrice(preMarketPrice)
-                    setPriceChange(preMarketChange)
-                    setPriceChangePercent(preMarketChangePercent)
-                    setChange(determindChange(preMarketChange))
-                }
-                break
-            case 'CLOSED':
-                if (typeof postMarketPrice === 'number') {
-                    setPrice(postMarketPrice)
-                    setPriceChange(postMarketChange)
-                    setPriceChangePercent(postMarketChangePercent)
-                    setChange(determindChange(postMarketChange))
-                }
-                break
-            default: // REGULAR
-                setPrice(regularMarketPrice)
-                setPriceChange(regularMarketChange)
-                setPriceChangePercent(regularMarketChangePercent)
-                setChange(determindChange(regularMarketChange))
-                break
-        }
-        setVolume(shortenNumber(regularMarketVolume || 0))
-    }, [dispatch, item])
 
     const removeStockSymbol = useCallback(() => {
         dispatch(removeStockSymbolList(symbol))

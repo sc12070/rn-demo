@@ -1,5 +1,5 @@
 import { CHANGE } from 'constants'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { Animated } from 'react-native'
 import { determindChange } from 'utils/numberHelper'
 
@@ -18,6 +18,12 @@ export default (info: IStockPriceInfo) => {
 
     const [changeInUpdate, setChangeInUpdate] = useState<CHANGE>(CHANGE.Equal)
     const [isShowPriceUpdateStyle, setIsShowPriceUpdateStyle] = useState<boolean>(false)
+
+    const priceString = useMemo<string>(() => `${price?.toFixed(2) || ''}`, [price])
+    const changeDisplay = useMemo<CHANGE>(
+        () => (isShowPriceUpdateStyle ? changeInUpdate : change),
+        [isShowPriceUpdateStyle, changeInUpdate, change]
+    )
 
     const prevPriceRef = useRef<number>(info.price)
     const fadeAnim = useRef(new Animated.Value(valuesOpacity)).current
@@ -49,8 +55,8 @@ export default (info: IStockPriceInfo) => {
     }, [info, fadeOut])
 
     return {
-        price: `${price?.toFixed(2) || ''}`,
-        change: isShowPriceUpdateStyle ? changeInUpdate : change,
+        price: priceString,
+        change: changeDisplay,
         fadeAnim
     }
 }

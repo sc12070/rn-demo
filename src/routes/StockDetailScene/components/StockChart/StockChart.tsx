@@ -6,6 +6,7 @@ import {
     Line,
     Tooltip
 } from 'react-native-responsive-linechart'
+import { tooltipFormatter, xAxisFormatter, yAxisFormatter } from 'utils/ChartDataHelper'
 import styles from './styles'
 import useStockChartHook from './useStockChartHooks'
 
@@ -16,14 +17,7 @@ const StockChart = ({
     close: Array<number | null>
     timestamp: Array<number>
 }) => {
-    const {
-        dataForLinechart,
-        yAxisDomon,
-        xAxisDomon,
-        xAxisFormatter,
-        yAxisFormatter,
-        tooltipFormatter
-    } = useStockChartHook(close, timestamp)
+    const { dataForLinechart, yAxisDomon, xAxisDomon } = useStockChartHook(close, timestamp)
 
     if (close.length === 0 || timestamp.length === 0) {
         return null
