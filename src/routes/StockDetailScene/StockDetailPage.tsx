@@ -18,7 +18,9 @@ const StockDetailPage = ({ route }: StockDetailPageProps) => {
 
     return (
         <View style={styles.bg}>
-            <Text style={[styles.text, styles.title]}>{symbol}</Text>
+            <Text testID="detail-symbol" style={[styles.text, styles.title]}>
+                {symbol}
+            </Text>
             <View style={styles.priceWrapper}>
                 <Text style={styles.text}>${regularMarketPrice}</Text>
                 <Text style={styles.text}>prev. ${previousClose}</Text>

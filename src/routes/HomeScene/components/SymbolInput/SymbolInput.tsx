@@ -10,13 +10,17 @@ const SymbolInput = () => {
     return (
         <View style={styles.rowWrapper}>
             <TextInput
+                testID="symbol-input"
                 style={styles.input}
                 placeholder="Symbol, e.g. GOOG"
                 value={symbolInput}
                 onChangeText={setSymbolInput}
                 clearButtonMode="always"
             />
-            <TouchableOpacity style={styles.searchBtn} onPress={() => addStockSymbol()}>
+            <TouchableOpacity
+                testID="search-btn"
+                style={styles.searchBtn}
+                onPress={() => addStockSymbol()}>
                 <Icon name="search" size={30} color="#BBB" />
             </TouchableOpacity>
         </View>

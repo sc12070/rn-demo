@@ -3,7 +3,7 @@ import { renderWrapper } from 'utils/providerWrapper'
 import { store } from 'store/store'
 
 import useStockItemHooks from '../useStockItemHooks'
-import { CHANGE } from 'constants'
+import { CHANGE } from 'constants/index'
 import { IStockInfo } from 'store/apiDataModel/home'
 
 describe('Stock Item', () => {

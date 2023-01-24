@@ -3,13 +3,18 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
+        "tcp": "adb reverse tcp:8081 tcp:8081",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "start": "react-native start",
         "test": "jest",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "export-huskyrc": "echo export PATH=\"/usr/local/bin:$PATH\" >> ~/.huskyrc",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "detox-build-i": "detox build --configuration ios.sim.debug",
+        "detox-build-a": "detox build --configuration android.emu.debug",
+        "detox-test-i": "detox test --configuration ios.sim.debug",
+        "detox-test-a": "detox test --configuration android.emu.debug"
     },
     "dependencies": {
         "@react-navigation/native": "^6.1.1",
@@ -36,6 +41,7 @@
         "@react-native-community/eslint-config": "^2.0.0",
         "@testing-library/react-hooks": "^8.0.1",
         "@tsconfig/react-native": "^2.0.2",
+        "@types/detox": "^18.1.0",
         "@types/jest": "^26.0.23",
         "@types/react": "^18.0.21",
         "@types/react-native": "^0.70.6",
@@ -45,6 +51,7 @@
         "@typescript-eslint/parser": "^5.37.0",
         "babel-jest": "^29.3.1",
         "babel-plugin-module-resolver": "^4.1.0",
+        "detox": "^20.1.2",
         "eslint": "^7.32.0",
         "husky": "^8.0.2",
         "jest": "^29.3.1",
@@ -64,6 +71,9 @@
             "jsx",
             "json",
             "node"
+        ],
+        "testPathIgnorePatterns": [
+            "./e2e"
         ],
         "allowJs": true,
         "moduleNameMapper": {

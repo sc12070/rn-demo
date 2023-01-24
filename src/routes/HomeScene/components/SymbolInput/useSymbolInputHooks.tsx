@@ -16,7 +16,7 @@ export default () => {
         if (symbolInput === '') {
             return
         }
-        const rslt = await dispatch(fetchChart(symbolInput))
+        const rslt = await dispatch(fetchChart({ symbol: symbolInput }))
         const list = rslt.payload?.chart?.result as Array<IChartInfo>
         if (!list || list.length === 0) {
             Alert.alert('', `Equity with symbol '${symbolInput}' not found`)

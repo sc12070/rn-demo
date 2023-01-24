@@ -28,7 +28,10 @@ const StockItem = ({ item, index }: { item: IStockInfo; index: number }) => {
             showsHorizontalScrollIndicator={false}
             pagingEnabled={true}
             snapToInterval={snapToInterval}>
-            <TouchableOpacity style={[styles.stockItemWrapper, oddWrapper]} onPress={toDetailPage}>
+            <TouchableOpacity
+                testID={`stock-item-${symbol}`}
+                style={[styles.stockItemWrapper, oddWrapper]}
+                onPress={toDetailPage}>
                 <View style={styles.stockItem}>
                     <Text style={styles.text}>{symbol}</Text>
                     <StockPrice price={price} change={change} shouldAnimated={true} />
@@ -39,7 +42,10 @@ const StockItem = ({ item, index }: { item: IStockInfo; index: number }) => {
                     </Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.deleteBtn, oddWrapper]} onPress={removeStockSymbol}>
+            <TouchableOpacity
+                testID={`stock-item-${symbol}-del`}
+                style={[styles.deleteBtn, oddWrapper]}
+                onPress={removeStockSymbol}>
                 <Text style={styles.deleteBtnLabel}>X</Text>
             </TouchableOpacity>
         </ScrollView>

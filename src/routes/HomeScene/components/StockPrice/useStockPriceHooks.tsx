@@ -1,4 +1,4 @@
-import { CHANGE } from 'constants'
+import { CHANGE } from 'constants/index'
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { Animated } from 'react-native'
 import { determindChange } from 'utils/numberHelper'
