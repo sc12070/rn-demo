@@ -12,7 +12,7 @@ Key tech:
 
 > Animated, Long pulling, Automatical unit test & syntax check before commit
 
-### Installation
+## Installation
 
 ```
 yarn install
@@ -20,13 +20,36 @@ cd ios
 pod install
 ```
 
-### Testing
+## Testing
+
+### unit test
 
 ```
 yarn jest
 ```
 
-### Commit
+### End to end test
+
+First time or changed native code
+
+```
+yarn detox-build-i;
+yarn detox-build-a;
+```
+
+iOS
+
+```
+yarn detox-test-i
+```
+
+Android
+
+```
+yarn detox-test-a
+```
+
+## Commit
 
 if the following error occured during commit
 
